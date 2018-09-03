@@ -1,0 +1,14 @@
+#ErrorDocument 404 https://www.marcandreramsay.ca/404 
+ErrorDocument 404 http://localhost/404
+
+RewriteEngine On
+# Force HTTPS On prod website
+RewriteCond %{HTTP_HOST} ^marcandreramsay.ca
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://marcandreramsay.ca/$1 [R=301,L]
+
+# remove .php extension
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
